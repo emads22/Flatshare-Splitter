@@ -1,142 +1,79 @@
-from fpdf import FPDF
-import webbrowser
-from constants import *
+from datetime import datetime
 
 
-class Bill:
+def validate_float(prompt):
     """
-    Object that contains data about a bill, such as total amount and period of the bill.
+    Prompt the user to enter a positive floating-point number.
+
+    Args:
+        prompt (str): The prompt message to display to the user.
+
+    Returns:
+        float: The validated positive floating-point number.
+
+    Raises:
+        ValueError: If the input is not a valid float or is a negative number.
     """
-
-    def __init__(self, amount, period) -> None:
-        """
-        Initialize a Bill instance.
-
-        Args:
-            amount (float): The total amount of the bill.
-            period (str): The period for which the bill is generated (e.g., 'March 2024').
-        """
-        self.amount = amount
-        self.period = period
+    while True:
+        try:
+            value = float(input(prompt))
+            if value < 0:
+                raise ValueError
+            return value
+        except ValueError:
+            print("\n-- Invalid input. Please enter a positive number. --\n")
 
 
-class Flatmate:
+def validate_int(prompt):
     """
-    Creates a flatmate person who lives in the flat and pays a share of the bill.
+    Prompt the user to enter a positive integer.
+
+    Args:
+        prompt (str): The prompt message to display to the user.
+
+    Returns:
+        int: The validated positive integer.
+
+    Raises:
+        ValueError: If the input is not a valid integer or is a negative number.
     """
-
-    def __init__(self, name, days_in_house) -> None:
-        """
-        Initialize a Flatmate instance.
-
-        Args:
-            name (str): The name of the flatmate.
-            days_in_house (int): The number of days the flatmate stayed in the house during the billing period.
-        """
-        self.name = name
-        self.days_in_house = days_in_house
-
-    def pays(self, bill: Bill, flatmate: 'Flatmate') -> float:
-        """
-        Calculate the amount this flatmate needs to pay based on their share of the days stayed.
-
-        We put single quotes around Flatmate ('Flatmate') in the type hint for the flatmate parameter to indicate that it's a string literal representing the class name, rather than an instance of the Flatmate class itself cz here the Flatmate class has not yet been fully defined, so we can't use it as a type hint directly.
-
-        Args:
-            bill (Bill): The bill object containing the total amount and period.
-            flatmate (Flatmate): The other flatmate sharing the bill.
-
-        Returns:
-            float: The amount this flatmate needs to pay.
-        """
-        # Calculate the weight of this flatmate's share of the bill
-        # This is done by dividing the number of days this flatmate was in the house
-        # by the total number of days both flatmates were in the house
-        weight = self.days_in_house / \
-            (self.days_in_house + flatmate.days_in_house)
-
-        # Calculate the amount this flatmate needs to pay
-        # This is done by multiplying the total bill amount by the weight calculated above
-        amount_to_pay = bill.amount * weight
-
-        return round(amount_to_pay, 2)
+    while True:
+        try:
+            value = int(input(prompt))
+            if value < 0:
+                raise ValueError
+            return value
+        except ValueError:
+            print("\n-- Invalid input. Please enter a positive integer. --\n")
 
 
-class PdfReport(FPDF):
+def validate_date(prompt):
     """
-    Creates a PDF file that contains data about the flatmates such as their names, 
-    their due amounts, and the period of the bill.
+    Validates the bill period entered by the user to ensure it's not in the future.
+
+    Args:
+        prompt (str): The prompt message asking the user to enter the bill period.
+
+    Returns:
+        str: A string representing the validated bill period in the format 'Month Year' (e.g., 'March 2024').
+
+    Raises:
+        ValueError: If the entered period is not in the correct format.
     """
-
-    def __init__(self, flatmate1: Flatmate, flatmate2: Flatmate, bill: Bill) -> None:
-        """
-        Initialize a PdfReport instance.
-
-        Args:
-            flatmate1 (Flatmate): The first flatmate.
-            flatmate2 (Flatmate): The second flatmate.
-            bill (Bill): The bill object containing the total amount and period.
-        """
-        # Initialize the parent class with specified orientation, unit, and format.
-        # Orientation 'P' is for Portrait mode.
-        # Unit 'pt' is points, a common unit for print documents, typically 1/72 of an inch.
-        # Format 'A4' is a standard paper size.
-        # Using 'pt' (points) is often better than 'px' (pixels) in print documents.
-        # Points are a physical measurement unit (1 point = 1/72 inch) and provide consistent sizing
-        # across different printers and display resolutions, ensuring the document looks as expected
-        # when printed. Pixels, on the other hand, are more suited for digital displays and can vary
-        # in size depending on screen resolution, making them less reliable for print consistency.
-        super().__init__(orientation='P', unit='pt', format='A4')  # 12pt = 16px
-        self.flatmate1 = flatmate1
-        self.flatmate2 = flatmate2
-        self.bill = bill
-
-    def generate(self) -> None:
-        # Define variables to be written in the PDF bill
-        flatmate1_name = self.flatmate1.name
-        flatmate1_payment = self.flatmate1.pays(self.bill, self.flatmate2)
-        flatmate2_name = self.flatmate2.name
-        flatmate2_payment = self.flatmate2.pays(self.bill, self.flatmate1)
-
-        # Start a new page in the PDF
-        self.add_page()
-
-        # Set the font for the header
-        self.set_font(family='Arial', style='B', size=24)
-
-        # Add image
-        self.image(str(BILL_LOGO), w=30, h=30)
-
-        # Add the main title of the document
-        self.cell(w=0, h=80, txt="Flatmates Bill", align='C', ln=1)
-
-        # Add the period label and value
-        self.set_font_size(22)  # Set font size for the period label
-        self.cell(w=100, h=30, txt=f"Period:", ln=0)
-        self.set_font(family='Courier')  # Set font for the period value
-        self.cell(w=150, h=30, txt=f"{self.bill.period.title()}", ln=1)
-        self.ln()  # Add a line break
-
-        # Add the body of flatmates names and respective payment amounts
-        self.set_font(family='Arial', size=20)  # Set font for 1st name
-        self.cell(w=100, h=30, txt=f"- {flatmate1_name}:", ln=0)
-        self.set_font(family='Courier')  # Set font for the payment value
-        self.cell(w=100, h=30, txt=f"${flatmate1_payment}", ln=1)
-
-        self.set_font(family='Arial')  # Reset font for 2nd name
-        self.cell(w=100, h=30, txt=f"- {flatmate2_name}:", ln=0)
-        self.set_font(family='Courier')  # Set font for the payment value
-        self.cell(w=100, h=30, txt=f"${flatmate2_payment}", ln=1)
-
-        # Reset font to Arial for further content if needed
-        self.set_font(family='Arial')
-
-        # Define the output file path based on the bill period
-        filename = self.bill.period.title().replace(" ", "_")
-        output_filepath = BILLS / f'{filename}_Bill.pdf'
-
-        # Save the PDF to the specified file path
-        self.output(str(output_filepath))
-
-        # Automatically open the created PDF file (bill) to view it using the default PDF viewer on the system
-        webbrowser.open(str(output_filepath))
+    current_date = datetime.now()
+    while True:
+        bill_period = input(prompt).title()
+        try:
+            # Try parsing the entered bill period into a datetime object
+            bill_period_date = datetime.strptime(bill_period, "%B %Y")
+            if bill_period_date > current_date:
+                # Check if the entered period is in the future
+                print(
+                    "\n-- Error: Bill period cannot be in the future. Please enter a valid period. --\n")
+            else:
+                # If the period is valid, format it as a string and return
+                bill_period_str = datetime.strftime(
+                    bill_period_date, "%B %Y")
+                return bill_period_str
+        except ValueError:
+            print("\n-- Error: Please enter a valid bill period in the format 'Month Year' (e.g., 'March 2024'). --\n")

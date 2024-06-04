@@ -1,50 +1,5 @@
-from app_utils import Bill, Flatmate, PdfReport
-
-
-def validate_float(prompt):
-    """
-    Prompt the user to enter a positive floating-point number.
-
-    Args:
-        prompt (str): The prompt message to display to the user.
-
-    Returns:
-        float: The validated positive floating-point number.
-
-    Raises:
-        ValueError: If the input is not a valid float or is a negative number.
-    """
-    while True:
-        try:
-            value = float(input(prompt))
-            if value < 0:
-                raise ValueError
-            return value
-        except ValueError:
-            print("\n-- Invalid input. Please enter a positive number. --\n")
-
-
-def validate_int(prompt):
-    """
-    Prompt the user to enter a positive integer.
-
-    Args:
-        prompt (str): The prompt message to display to the user.
-
-    Returns:
-        int: The validated positive integer.
-
-    Raises:
-        ValueError: If the input is not a valid integer or is a negative number.
-    """
-    while True:
-        try:
-            value = int(input(prompt))
-            if value < 0:
-                raise ValueError
-            return value
-        except ValueError:
-            print("\n-- Invalid input. Please enter a positive integer. --\n")
+from classes import Bill, Flatmate, PdfReport
+from app_utils import validate_float, validate_int, validate_date
 
 
 def main():
@@ -61,9 +16,9 @@ def main():
     Prints each flatmate's share of the bill and generates a PDF report.
     """
     # Prompt user for input
-    bill_amount = validate_float("\n\n- Enter the total bill amount: ")
-    bill_period = input(
-        "\n- Enter the bill period (e.g., 'March 2024'): ").title()
+    bill_amount = validate_float("\n\n- Enter the total bill amount (USD): ")
+    bill_period = validate_date(
+        "\n- Enter the bill period (e.g., 'March 2024'): ")
 
     # Get details for the first flatmate
     name1 = input("\n\n- Enter the first flatmate's name: ").title()
