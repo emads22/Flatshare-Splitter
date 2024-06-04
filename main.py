@@ -23,12 +23,12 @@ def main():
     # Get details for the first flatmate
     name1 = input("\n\n- Enter the first flatmate's name: ").title()
     days1 = validate_int(f'  Enter the number of days "{
-        name1}" stayed in the house: ')
+                         name1}" stayed in the house during "{bill_period.title()}": ')
 
     # Get details for the second flatmate
     name2 = input("\n\n- Enter the second flatmate's name: ").title()
     days2 = validate_int(f'  Enter the number of days "{
-        name2}" stayed in the house: ')
+                         name2}" stayed in the house during "{bill_period.title()}": ')
 
     # Create Bill and Flatmate instances
     the_bill = Bill(amount=bill_amount, period=bill_period)
@@ -36,10 +36,10 @@ def main():
     flatmate2 = Flatmate(name=name2, days_in_house=days2)
 
     # Print the payment information
-    print(f'\n\n>> {flatmate1.name} pays ${flatmate1.pays(bill=the_bill,
-          flatmate=flatmate2)}')
-    print(f'\n>> {flatmate2.name} pays ${flatmate2.pays(bill=the_bill,
-          flatmate=flatmate1)}')
+    print(f'\n\n>> {flatmate1.name} pays ${
+          flatmate1.pays(bill=the_bill, flatmate=flatmate2)}')
+    print(f'\n>> {flatmate2.name} pays ${
+          flatmate2.pays(bill=the_bill, flatmate=flatmate1)}')
 
     # Generate the PDF report (bill)
     pdf_bill = PdfReport(flatmate1, flatmate2, the_bill)
@@ -50,12 +50,12 @@ def main():
 
     # Return the url
     return pdf_bill_url
-    
 
 
 if __name__ == "__main__":
     try:
         bill_url = main()
-        print(f'\n\n--- PDF Flatmates Bill generated successfully.\n\n    You can find it here: {bill_url} ---\n\n')
+        print(
+            f'\n\n--- PDF Flatmates Bill generated successfully.\n    You can find it here: "{bill_url}" ---\n\n')
     except Exception as e:
-        print(f"\n\n--- An error occured: {e} ---\n\n")
+        print(f'\n\n--- An error occured: "{e}" ---\n\n')
