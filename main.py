@@ -49,6 +49,11 @@ class PdfReport(FPDF):
         self.bill = bill
 
     def generate(self) -> None:
+        flatmate1_name = self.flatmate1.name
+        flatmate1_payment = self.flatmate1.pays(self.bill, self.flatmate2)
+        flatmate2_name = self.flatmate2.name
+        flatmate2_payment = self.flatmate2.pays(self.bill, self.flatmate1)
+
         # Start a new page in the PDF
         self.add_page()
 
@@ -73,16 +78,14 @@ class PdfReport(FPDF):
 
         # Add the body of flatmates names and respective payment amounts
         self.set_font(family='Arial', size=20)  # Set font for 1st name
-        self.cell(w=100, h=40, txt=f"- {self.flatmate1.name}:", ln=0)
+        self.cell(w=100, h=40, txt=f"- {flatmate1_name}:", ln=0)
         self.set_font(family='Courier')  # Set font for the payment value
-        self.cell(w=100, h=40, txt=f"${self.flatmate1.pays(
-            self.bill, self.flatmate2)}", ln=1)
+        self.cell(w=100, h=40, txt=f"${flatmate1_payment}", ln=1)
 
         self.set_font(family='Arial')  # Reset font for 2nd name
-        self.cell(w=100, h=40, txt=f"- {self.flatmate2.name}:", ln=0)
+        self.cell(w=100, h=40, txt=f"- {flatmate2_name}:", ln=0)
         self.set_font(family='Courier')  # Set font for the payment value
-        self.cell(w=100, h=40, txt=f"${self.flatmate2.pays(
-            self.bill, self.flatmate1)}", ln=1)
+        self.cell(w=100, h=40, txt=f"${flatmate2_payment}", ln=1)
 
         # Reset font to Arial for further content if needed
         self.set_font(family='Arial')
