@@ -49,6 +49,7 @@ class PdfReport(FPDF):
         self.bill = bill
 
     def generate(self) -> None:
+        # Define variables to be written in the PDF bill
         flatmate1_name = self.flatmate1.name
         flatmate1_payment = self.flatmate1.pays(self.bill, self.flatmate2)
         flatmate2_name = self.flatmate2.name
@@ -60,11 +61,8 @@ class PdfReport(FPDF):
         # Set the font for the header
         self.set_font(family='Arial', style='B', size=24)
 
-        # Add image (commented out, uncomment to use)
-        # self.image(str(BILL_LOGO), w=40)
-
-        # Set position to the right of the image (commented out, uncomment to use)
-        # self.set_xy(35, 8)  # x should be the width of the image + some spacing, y should be the same as image y
+        # Add image 
+        self.image(str(BILL_LOGO), w=30, h=30)
 
         # Add the main title of the document
         self.cell(w=0, h=80, txt="Flatmates Bill", align='C', ln=1)
