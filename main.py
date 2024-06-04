@@ -1,4 +1,4 @@
-from classes import Bill, Flatmate, PdfReport
+from classes import Bill, Flatmate, PdfReport, FileShare
 from app_utils import validate_float, validate_int, validate_date
 
 
@@ -41,14 +41,21 @@ def main():
     print(f'\n>> {flatmate2.name} pays ${flatmate2.pays(bill=the_bill,
           flatmate=flatmate1)}')
 
-    # Generate the PDF report
-    report = PdfReport(flatmate1, flatmate2, the_bill)
-    report.generate()
+    # Generate the PDF report (bill)
+    pdf_bill = PdfReport(flatmate1, flatmate2, the_bill)
+    pdf_bill_path = pdf_bill.generate()
+
+    # Share the pdf bill by uploading it to filestack and get its url
+    pdf_bill_url = FileShare(filepath=pdf_bill_path).share()
+
+    # Return the url
+    return pdf_bill_url
+    
 
 
 if __name__ == "__main__":
     try:
-        main()
-        print(f"\n\n--- PDF Flatmates Bill generated successfully. ---\n\n")
+        bill_url = main()
+        print(f'\n\n--- PDF Flatmates Bill generated successfully.\n\n    You can find it here: {bill_url} ---\n\n')
     except Exception as e:
         print(f"\n\n--- An error occured: {e} ---\n\n")
