@@ -72,7 +72,7 @@ class PdfReport(FPDF):
         self.cell(w=100, h=40, txt=f"Period:", ln=0)
         self.set_font(family='Courier')  # Set font for the period value
         self.cell(w=150, h=40, txt=f"{self.bill.period.title()}", ln=1)
-        self.ln()  # Add a line break
+        # self.ln()  # Add a line break
 
         # Add the body of flatmates names and respective payment amounts
         self.set_font(family='Arial', size=20)  # Set font for 1st name
