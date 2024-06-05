@@ -20,7 +20,7 @@ The application also shares the generated PDF report using the Filestack API. Ho
     ```
 2. **Navigate to the Project Folder**:
     ```sh
-    cd path/to/project-folder
+    cd Flatmates-Bill
     ```
 3. **Ensure Python 3.x is Installed**: Check your Python version using:
     ```sh
