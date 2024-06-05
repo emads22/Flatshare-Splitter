@@ -181,7 +181,13 @@ class FileShare:
 
         Returns:
             str: The URL of the shared file.
+
+        Raises:
+            Exception: If an error occurs during file upload.
         """
-        client = Client(self.api_key)
-        pdf_filelink = client.upload(filepath=self.filepath)
-        return pdf_filelink.url
+        try:
+            client = Client(self.api_key)
+            pdf_filelink = client.upload(filepath=self.filepath)
+            return pdf_filelink.url
+        except Exception as e:
+            raise Exception(f"An error occurred while sharing the file: {e}")

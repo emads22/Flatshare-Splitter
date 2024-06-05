@@ -56,6 +56,6 @@ if __name__ == "__main__":
     try:
         bill_url = main()
         print(
-            f'\n\n--- PDF Flatmates Bill generated successfully.\n    You can find it here: "{bill_url}" ---\n\n')
+            f'\n\n--- PDF Flatmates Bill generated successfully.\n\n    You can find it here: "{bill_url}" ---\n\n')
     except Exception as e:
         print(f'\n\n--- An error occured: "{e}" ---\n\n')
