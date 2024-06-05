@@ -16,7 +16,7 @@ The application also shares the generated PDF report using the Filestack API. Ho
 ## Setup
 1. **Clone the Repository**:
     ```sh
-    git clone <repository-url>
+    git clone https://github.com/emads22/Flatmates-Bill.git
     ```
 2. **Navigate to the Project Folder**:
     ```sh
