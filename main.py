@@ -1,5 +1,6 @@
 from classes import Bill, Flatmate, PdfReport, FileShare
 from app_utils import validate_float, validate_int, validate_date
+from constants import ASCII_ART
 
 
 def main():
@@ -15,6 +16,8 @@ def main():
 
     Prints each flatmate's share of the bill and generates a PDF report.
     """
+    print("\n\n\n", ASCII_ART, "\n")
+
     # Prompt user for input
     bill_amount = validate_float("\n\n- Enter the total bill amount (USD): ")
     bill_period = validate_date(

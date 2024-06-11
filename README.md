@@ -1,7 +1,18 @@
-# Flatmates Bill
+# Flatshare Splitter
 
+```sh
+  ______  _         _         _                             _____         _  _  _    _              
+ |  ____|| |       | |       | |                           / ____|       | |(_)| |  | |             
+ | |__   | |  __ _ | |_  ___ | |__    __ _  _ __  ___     | (___   _ __  | | _ | |_ | |_  ___  _ __ 
+ |  __|  | | / _` || __|/ __|| '_ \  / _` || '__|/ _ \     \___ \ | '_ \ | || || __|| __|/ _ \| '__|
+ | |     | || (_| || |_ \__ \| | | || (_| || |  |  __/     ____) || |_) || || || |_ | |_|  __/| |   
+ |_|     |_| \__,_| \__||___/|_| |_| \__,_||_|   \___|    |_____/ | .__/ |_||_| \__| \__|\___||_|   
+                                                               | |                               
+                                                               |_|                               
+```
+                                                               
 ## Overview
-Flatmates Bill is a Python CLI (Command-Line Interface) application designed to fairly split the utility bill among flatmates based on the number of days they stayed in the house during the billing period. The application leverages Object-Oriented Programming (OOP) principles to enhance modularity and maintainability.
+Flatshare Splitter is a Python CLI (Command-Line Interface) application designed to fairly split the utility bill among flatmates based on the number of days they stayed in the house during the billing period. The application leverages Object-Oriented Programming (OOP) principles to enhance modularity and maintainability.
 
 The application also shares the generated PDF report using the Filestack API. However, users can modify the code to use any other cloud service for file sharing. The PDF bill design is basic and can be customized further depending on user preference and needs.
 
@@ -16,11 +27,11 @@ The application also shares the generated PDF report using the Filestack API. Ho
 ## Setup
 1. **Clone the Repository**:
     ```sh
-    git clone https://github.com/emads22/Flatmates-Bill.git
+    git clone https://github.com/emads22/Flatshare-Splitter.git
     ```
 2. **Navigate to the Project Folder**:
     ```sh
-    cd Flatmates-Bill
+    cd Flatshare-Splitter
     ```
 3. **Ensure Python 3.x is Installed**: Check your Python version using:
     ```sh
