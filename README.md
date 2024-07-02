@@ -22,6 +22,13 @@ The application also shares the generated PDF report using the Filestack API. Ho
 - **Customizable File Sharing**: Shares the generated PDF report using the Filestack API, with the option to modify the code for using other cloud services.
 - **Error Handling**: Gracefully handle errors during the file-sharing process.
 
+## Technologies Used
+- **Filestack**: Used for uploading and sharing files via the cloud.
+- **FPDF**: Used for generating PDF documents in Python.
+- **python-dotenv**: Used for loading environment variables from a `.env` file.
+- **webbrowser**: Used for opening URLs in a web browser.
+- **datetime**: Used for manipulating dates and times in Python.
+
 ## Setup
 1. **Clone the Repository**:
     ```sh
