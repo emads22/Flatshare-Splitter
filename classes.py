@@ -1,5 +1,5 @@
-import os
 import webbrowser
+import time
 from fpdf import FPDF
 from filestack import Client
 from constants import *
@@ -143,7 +143,7 @@ class PdfReport(FPDF):
 
         # Define the output file path based on the bill period
         filename = self.bill.period.title().replace(" ", "_")
-        output_filepath = BILLS / f'{filename}_Bill.pdf'
+        output_filepath = BILLS / f'{filename}_Bill_{int(time.time())}.pdf'
 
         # Save the PDF to the specified file path
         self.output(str(output_filepath))
