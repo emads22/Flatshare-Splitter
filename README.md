@@ -1,15 +1,6 @@
 # Flatshare Splitter
 
 ![Flatshare_Splitter_logo](./assets/images/Flatshare_Splitter_logo.png)
-
-```bash
-███████╗██╗      █████╗ ████████╗███████╗██╗  ██╗ █████╗ ██████╗ ███████╗    ███████╗██████╗ ██╗     ██╗████████╗████████╗███████╗██████╗ 
-██╔════╝██║     ██╔══██╗╚══██╔══╝██╔════╝██║  ██║██╔══██╗██╔══██╗██╔════╝    ██╔════╝██╔══██╗██║     ██║╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗
-█████╗  ██║     ███████║   ██║   ███████╗███████║███████║██████╔╝█████╗      ███████╗██████╔╝██║     ██║   ██║      ██║   █████╗  ██████╔╝
-██╔══╝  ██║     ██╔══██║   ██║   ╚════██║██╔══██║██╔══██║██╔══██╗██╔══╝      ╚════██║██╔═══╝ ██║     ██║   ██║      ██║   ██╔══╝  ██╔══██╗
-██║     ███████╗██║  ██║   ██║   ███████║██║  ██║██║  ██║██║  ██║███████╗    ███████║██║     ███████╗██║   ██║      ██║   ███████╗██║  ██║
-╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝    ╚══════╝╚═╝     ╚══════╝╚═╝   ╚═╝      ╚═╝   ╚══════╝╚═╝  ╚═╝
-```
                                                                
 ## Overview
 Flatshare Splitter is a Python CLI (Command-Line Interface) application designed to fairly split the utility bill among flatmates based on the number of days they stayed in the house during the billing period. The application leverages Object-Oriented Programming (OOP) principles to enhance modularity and maintainability.
